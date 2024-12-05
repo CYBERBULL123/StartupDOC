@@ -1,144 +1,152 @@
 from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain.chains import LLMChain, SimpleSequentialChain
 
-def generate_startup_prompt(query, document_type, language, tone):
+
+def generate_prompt_template(document_type, tone):
     """
-    Generate dynamic prompts for startup automation based on user inputs.
-    
+    Generate a dynamic prompt template based on document type and tone.
+
     Args:
-        query (str): The user input or topic related to the startup.
-        document_type (str): Type of document being generated (Business Plan, Funding Proposal, etc.).
-        language (str): The language for the response (English, Hindi, etc.).
+        document_type (str): The type of document to generate (e.g., Business Plan, Funding Proposal, etc.).
         tone (str): The tone of the response (Formal, Casual, etc.).
-    
+
     Returns:
-        PromptTemplate: The generated prompt template for LLM generation.
+        PromptTemplate: A LangChain prompt template for dynamic LLM inputs.
     """
-    
-    # Define template structures for various document types
-    document_templates = {
+    templates = {
         "business_plan": {
             "neutral": """
-                You are a professional business strategist in {language}. 
-                Respond to the user's query in a {tone} tone and generate a comprehensive business plan.
+                You are a business strategist in {language}. Generate a business plan for the query.
+                Tone: {tone}
                 Query: {query}
-                The business plan should include sections like Market Analysis, Product/Service Overview, and Financial Projections.
-                Provide detailed insights and actionable steps for each section.
+                
+                Sections:
+                1. Market Analysis
+                2. Product/Service Overview
+                3. Financial Projections
+                Provide detailed insights for each section.
             """,
             "formal": """
-                You are an experienced business consultant in {language}. 
-                Respond in a formal tone and develop a structured business plan based on the provided information.
+                You are an expert business consultant in {language}. Develop a structured business plan.
+                Tone: {tone}
                 Query: {query}
-                The business plan should cover all necessary components such as Market Research, Competitive Analysis, Product Overview, and Financial Forecast.
-                Include strategic recommendations and long-term objectives.
+                
+                The plan should include:
+                1. Market Research
+                2. Competitive Analysis
+                3. Financial Metrics
+                Make the content professional and data-driven.
             """,
             "casual": """
-                You are a creative business consultant in {language}. 
-                Respond in a friendly, casual tone and help create a detailed yet easy-to-understand business plan.
+                You are a creative business consultant in {language}. Create a user-friendly business plan.
+                Tone: {tone}
                 Query: {query}
-                The business plan should focus on making the content approachable yet insightful. Include market insights, product idea, and financial outlook.
-            """
+                
+                Focus on:
+                - Market Trends
+                - Product/Service Insights
+                - Financial Potential
+                Use a conversational style.
+            """,
         },
         "funding_proposal": {
             "neutral": """
-                You are an expert in business finance in {language}. 
-                Respond in a neutral tone to generate a funding proposal for the user's startup.
+                You are a financial advisor in {language}. Generate a funding proposal for the query.
+                Tone: {tone}
                 Query: {query}
-                The proposal should outline the funding requirements, use of funds, and return on investment for potential investors.
-                Provide a structured, clear proposal with financial projections and growth potential.
+                
+                Include:
+                1. Funding Requirements
+                2. Use of Funds
+                3. ROI Projections
+                Make it clear and investor-focused.
             """,
             "formal": """
-                You are a seasoned finance expert in {language}. 
-                Respond in a formal tone and generate a comprehensive funding proposal.
+                You are an experienced finance expert in {language}. Create a detailed funding proposal.
+                Tone: {tone}
                 Query: {query}
-                The proposal should include detailed financial metrics, funding requirements, ROI projections, and risk analysis.
-                Provide precise, formal language that investors can trust.
+                
+                Highlight:
+                1. Funding Needs
+                2. Investment Returns
+                3. Risk Analysis
+                Use professional language to engage investors.
             """,
             "casual": """
-                You are a financial advisor in {language}. 
-                Respond in a relaxed and approachable tone to create an engaging funding proposal.
+                You are a startup mentor in {language}. Develop a relaxed yet impactful funding proposal.
+                Tone: {tone}
                 Query: {query}
-                Focus on making the proposal simple yet impactful, highlighting funding needs, the potential for returns, and a roadmap for growth.
-            """
+                
+                Key Points:
+                - Why funding is needed
+                - How funds will be used
+                - Potential for growth and returns
+                Use an approachable tone.
+            """,
         },
-        "pitch_deck": {
-            "neutral": """
-                You are a creative business strategist in {language}. 
-                Respond in a neutral tone and develop a compelling pitch deck for the user's startup.
-                Query: {query}
-                The pitch deck should present the business idea, market opportunity, team overview, and financial forecast.
-                Keep the content concise and impactful, focusing on what potential investors would find most compelling.
-            """,
-            "formal": """
-                You are an experienced business presenter in {language}. 
-                Respond in a formal tone and create a professional pitch deck.
-                Query: {query}
-                The pitch deck should include sections on the problem, solution, market analysis, competition, team, and financials.
-                Present a clear, polished narrative that convinces investors to take action.
-            """,
-            "casual": """
-                You are an engaging pitch creator in {language}. 
-                Respond in a friendly, conversational tone to develop a creative pitch deck.
-                Query: {query}
-                Make the pitch deck visually appealing and straightforward. Focus on clarity and engagement to impress investors.
-            """
-        },
-        "investor_materials": {
-            "neutral": """
-                You are an investment consultant in {language}. 
-                Respond in a neutral tone to develop detailed investor materials for the user's startup.
-                Query: {query}
-                The materials should focus on the company's value proposition, team, market potential, and financial forecast. 
-                Keep the content balanced and professional, presenting the startup as a great investment opportunity.
-            """,
-            "formal": """
-                You are an investment banker in {language}. 
-                Respond in a formal tone and generate highly professional investor materials.
-                Query: {query}
-                Provide a structured, detailed document that highlights key financial metrics, the startup's growth potential, and risk analysis.
-            """,
-            "casual": """
-                You are a startup advisor in {language}. 
-                Respond in a casual, friendly tone to create investor materials.
-                Query: {query}
-                Focus on simplifying the complex financial and business details in an engaging way. Ensure that potential investors can easily understand the startup's potential.
-            """
-        }
+        # Add other document types (pitch_deck, investor_materials, etc.) as needed.
     }
 
-    # Select the correct template based on document type and tone
-    template = document_templates.get(document_type.lower(), document_templates["business_plan"]).get(tone.lower(), document_templates[document_type.lower()]["neutral"])
+    # Default to neutral tone if specific tone is not found
+    document_templates = templates.get(document_type.lower(), templates["business_plan"])
+    template = document_templates.get(tone.lower(), document_templates["neutral"])
 
-    # Create the PromptTemplate object with dynamic input variables
-    prompt = PromptTemplate(
+    return PromptTemplate(
         input_variables=["query", "language", "tone"],
-        template=template.strip()  # Removes extra spaces/lines
+        template=template.strip()
     )
 
-    return prompt
 
-def create_startup_document_chain(query, document_type, language, tone, llm):
+def create_document_chain(llm, document_type, tone="neutral"):
     """
-    Create a chain that generates a document for a startup based on user inputs.
-    
+    Create an LLMChain for generating startup documents dynamically.
+
     Args:
-        query (str): The user's input.
-        document_type (str): Type of document to generate (Business Plan, Funding Proposal, etc.).
-        language (str): The language of the response (English, Hindi, etc.).
-        tone (str): The tone of the response (Formal, Casual, etc.).
-        llm (LLM): The LLM instance used to generate content.
-    
+        llm (LLM): The LLM instance for generating content.
+        document_type (str): The type of document (e.g., Business Plan, Funding Proposal).
+        tone (str): The tone of the response (Formal, Casual, Neutral).
+
     Returns:
-        str: The generated document.
+        LLMChain: A LangChain object configured with the dynamic prompt template.
     """
-    
-    # Generate the dynamic prompt using the input data
-    prompt = generate_startup_prompt(query, document_type, language, tone)
+    prompt_template = generate_prompt_template(document_type, tone)
+    return LLMChain(llm=llm, prompt=prompt_template)
 
-    # Create the chain with the LLM and the generated prompt
-    chain = LLMChain(llm=llm, prompt=prompt)
 
-    # Generate the document by running the chain
-    generated_document = chain.run(query=query, language=language, tone=tone)
+def generate_startup_document(llm, query, document_type, language, tone):
+    """
+    Generate a startup-related document based on user inputs.
 
-    return generated_document
+    Args:
+        llm (LLM): The LLM instance for generating content.
+        query (str): The user's input or topic.
+        document_type (str): Type of document to generate (e.g., Business Plan, Funding Proposal).
+        language (str): Language for the response (English, Hindi, etc.).
+        tone (str): The tone of the response (Formal, Casual, etc.).
+
+    Returns:
+        str: The generated document text.
+    """
+    chain = create_document_chain(llm, document_type, tone)
+    return chain.run(query=query, language=language, tone=tone)
+
+
+def build_sequential_chain(llm, tasks):
+    """
+    Build a sequential chain for complex workflows (e.g., generating multiple sections).
+
+    Args:
+        llm (LLM): The LLM instance for generating content.
+        tasks (list): A list of dictionaries defining tasks (e.g., [{"type": "business_plan", "tone": "formal"}]).
+
+    Returns:
+        SimpleSequentialChain: A LangChain object to process tasks sequentially.
+    """
+    chains = []
+    for task in tasks:
+        document_type = task.get("type", "business_plan")
+        tone = task.get("tone", "neutral")
+        chain = create_document_chain(llm, document_type, tone)
+        chains.append(chain)
+
+    return SimpleSequentialChain(chains=chains)
