@@ -1,0 +1,10 @@
+# Ignore the secrets.toml file
+.streamlit/secrets.toml
+
+# Add other common ignores if needed
+*.pyc
+__pycache__/
+.env
+.vscode/
+.idea/
+.DS_Store
