@@ -1,6 +1,6 @@
 import streamlit as st
 from backend.gemini import query_gemini  # Import the Gemini function
-from backend.langchain import create_startup_document_chain  # Import LangChain function
+from backend.langchain import generate_startup_document  # Import LangChain function
 
 # App Title and Description
 st.set_page_config(page_title="Startup Automation Tool", layout="wide")
@@ -85,7 +85,7 @@ if submit_button:
             doc_content = query_gemini(context, prompt)
         else:
             # Use LangChain
-            doc_content = create_startup_document_chain(
+            doc_content = generate_startup_document(
                 query=selected_tab,
                 document_type=selected_tab.lower().replace(" ", "_"),
                 language=response_language,
