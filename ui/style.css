@@ -1,10 +1,13 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&display=swap');
+
 /* Global Reset and Box Sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', 'Arial', sans-serif; /* Material UI recommended font */
-    line-height: 1.5;
+    font-family: 'Roboto', 'Open Sans', sans-serif; /* Professional Google fonts */
+    line-height: 1.6;
 }
 
 /* Body Styling */
