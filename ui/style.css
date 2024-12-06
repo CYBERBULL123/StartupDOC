@@ -1,0 +1,152 @@
+/* Global Reset and Box Sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-size: 16px;
+    line-height: 1.5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* App Container */
+.app-container {
+    background-color: #1F1F1F;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Header */
+h1 {
+    color: #4CAF50;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+h3 {
+    color: #E5E5E5;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Input Fields and Select Boxes */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #B0B0B0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Common Input Style */
+.stTextInput,
+.stTextArea,
+.stSelectbox,
+.stRadio {
+    width: 100%;
+    padding: 12px 18px;
+    background-color: #33333360;
+    border: 2px solid #555;
+    border-radius: 8px;
+    color: #E5E5E5;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0; /* Space above and below the container */
+}
+
+.stButton>button {
+    background-color: #1f2833; /* Dark background for buttons */
+    color: #66fcf1; /* Cyan text for buttons */
+    border: 1px solid #66fcf1;
+    border-radius: 8px; /* Slightly rounded corners */
+    padding: 0.75rem 1.5rem; /* Padding for better clickability */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem; /* Increase font size for better readability */
+    font-weight: 500; /* Slightly bolder font weight */
+    animation: glow 1.5s infinite;
+    display: block; /* make the button a block element */
+    margin: 0 auto; /* center the button horizontally */
+    text-align: center; /* center the text inside the button */
+}
+
+.stButton>button:hover {
+    color: #db4c18;
+    transform: scale(1.1);
+    box-shadow: 0 0 5px #66fcf1, 0 0 10px #45a29e, 0 0 25px #66fcf1;
+}
+
+
+/* Loader Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Link Styling */
+a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 20px;
+    display: block;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Fading Effect for Generated Content */
+.generated-doc {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Minimal Scrollbar for Textarea */
+.stTextArea::-webkit-scrollbar {
+    width: 6px;
+}
+
+.stTextArea::-webkit-scrollbar-thumb {
+    background-color: #4CAF50;
+    border-radius: 3px;
+}
+
+.stTextArea::-webkit-scrollbar-track {
+    background: #333;
+}
