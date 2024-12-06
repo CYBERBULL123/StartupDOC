@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Patrick Hand', cursive;
 }
 
 /* Body Styling */
@@ -30,6 +30,8 @@ body {
     box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.7);
     text-align: center;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Header */
@@ -43,11 +45,12 @@ h1 {
 }
 
 h3 {
-    color: #E5E5E5;
+    color: #1fa01d;
     font-size: 1.6rem;
     margin-bottom: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
+    font-style: italic;
 }
 
 /* Paragraph Styling */
@@ -77,8 +80,8 @@ label {
 .stRadio {
     width: 100%;
     padding: 14px 20px;
-    background-color: #333333;
-    border: 2px solid #555;
+    background-color: #040202;
+    border: 2px solid #575656;
     border-radius: 10px;
     color: #E5E5E5;
     font-size: 1rem;
@@ -103,42 +106,31 @@ label {
 }
 
 .stButton>button {
-    background-color: #1f2833;
-    color: #66fcf1;
-    border: 1px solid #66fcf1;
-    border-radius: 10px;
+    background-color: #090a0a;
+    color: #fc6666;
+    border: 3px solid #484241;
     padding: 0.8rem 1.8rem;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: 500;
-    animation: glow 1.5s infinite;
     display: block;
     margin: 0 auto;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .stButton>button:hover {
     color: #db4c18;
     transform: scale(1.1);
-    box-shadow: 0 0 6px #66fcf1, 0 0 12px #45a29e, 0 0 25px #66fcf1;
-    background-color: #2f3d45;
+    background-color: #161819;
+    border-radius: 40px;
+    border-color: rgb(26, 250, 6);
 }
 
-/* Loader Animation */
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 /* Link Styling */
 a {
-    color: #4CAF50;
+    color: #5a06b4;
     text-decoration: none;
     font-weight: 600;
     margin-top: 25px;

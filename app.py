@@ -61,7 +61,8 @@ if st.session_state.show_info:
         - **Funding Proposals:** Quickly create documents that attract investors and partners. 💸
         - **Pitch Decks:** Turn your business idea into a compelling presentation for investors. 🎤
         - **Investor Materials:** Craft documents that highlight what matters most to investors. 📈
-
+       
+        ----------
         ***💡 How It Works***
         
         Our tool is easy to use and walks you through the entire process:
@@ -70,14 +71,16 @@ if st.session_state.show_info:
         3. **Automated Creation:** The tool instantly generates your document based on your input. 🚀
         4. **Customization Options:** You can fine-tune the document to match your style, tone, and audience. 🎨
         5. **Ready to Go:** Download your document in a professional format, ready for presentations or investment meetings. 📥
-
+         
+        ------------
         ***⚙️ Simple & Smart Technology***
         
         The Startup Automation Tool uses smart technology behind the scenes to ensure your documents are:
         - **Tailored to Your Business:** It understands the unique details of your startup and creates documents that fit your specific needs. 📊
         - **Investor-Ready:** The documents highlight the key information investors care about, making your startup more attractive to potential partners. 💼
         - **Efficient & Fast:** What would normally take hours or days to create, is done in just a few minutes. ⏱️
-
+       
+        -------------
         ***🌟 Why Choose Our Tool?***
         
         1. **Saves Time:** No need to spend hours writing and formatting documents. Our tool does the hard work for you. ⏳
@@ -97,77 +100,124 @@ else:
     # App Header
     st.markdown(
     """
-    # Startup Automation Tool
+    # Startup Automation Tool 🚀
     Streamline your startup journey with AI-powered document generation.
     Create ***Business Plans***, ***Funding Proposals***, ***Pitch Decks***, and ***Investor Materials*** in just a few clicks!
     """
     )
 
-    # Dropdown for Document Type
+    # Dropdown for Document Type with Emojis
     st.markdown("### 📑 Select the Document Type")
     doc_type = st.selectbox(
-    "",
-    ["Business Plan", "Funding Proposal", "Pitch Deck", "Investor Materials"],
-    index=0,
+        "",
+        [
+            "Business Plan 🏢",
+            "Funding Proposal 💼",
+            "Pitch Deck 🎯",
+            "Investor Materials 📈",
+            "Technical Documentation 📘",
+            "Project Proposal 🏗️",
+            "Investment Memorandum 💡",
+            "Shareholder Update 📊",
+        ],
+        index=0,
     )
 
-    # Input Fields Configuration
+    # Input Fields Configuration with Enhanced Data
     fields = {
-    "Business Plan": [
-        {"label": "🏢 Business Name", "type": "text", "key": "business_name"},
-        {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
-            "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"]},
-        {"label": "📊 Market Data", "type": "section", "key": "market_data"},
-        {"label": "💰 Financial Data", "type": "section", "key": "financial_data"},
-    ],
-    "Funding Proposal": [
-        {"label": "🏢 Business Name", "type": "text", "key": "business_name"},
-        {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
-            "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"]},
-        {"label": "📈 Investment Opportunity", "type": "textarea", "key": "investment_opportunity"},
-        {"label": "💵 Capital Needed (in USD)", "type": "number", "key": "capital_needed", "default": 1000},
-    ],
-    "Pitch Deck": [
-        {"label": "🏢 Business Name", "type": "text", "key": "business_name"},
-        {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
-            "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"]},
-        {"label": "💡 Business Idea", "type": "textarea", "key": "business_idea"},
-        {"label": "🎯 Team Vision", "type": "textarea", "key": "team_vision"},
-    ],
-    "Investor Materials": [
-        {"label": "🏢 Business Name", "type": "text", "key": "business_name"},
-        {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
-            "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"]},
-        {"label": "📈 Investment Opportunity", "type": "textarea", "key": "investment_opportunity"},
-        {"label": "👥 Team Background", "type": "textarea", "key": "team_background"},
-        {"label": "📉 Financial Forecast", "type": "textarea", "key": "financial_forecast"},
-    ],
+        "Business Plan 🏢": [
+            {"label": "🏢 Business Name", "type": "text", "key": "business_name", "placeholder": "Enter your business name"},
+            {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
+                "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"], "default": "IT"},
+            {"label": "💰 Financial Data", "type": "section", "key": "financial_data"},
+            {"label": "🌍 Target Market", "type": "textarea", "key": "target_market", "placeholder": "Describe your target market"},
+            {"label": "📊 Competitors", "type": "textarea", "key": "competitors", "placeholder": "Who are your competitors?"},
+            {"label": "📈 Market Trends", "type": "textarea", "key": "market_trends", "placeholder": "What are the current market trends?"},
+        ],
+        "Funding Proposal 💼": [
+            {"label": "🏢 Business Name", "type": "text", "key": "business_name", "placeholder": "Enter your business name"},
+            {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
+                "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"], "default": "IT"},
+            {"label": "📈 Investment Opportunity", "type": "textarea", "key": "investment_opportunity", "placeholder": "Describe the investment opportunity"},
+            {"label": "💵 Capital Needed (in USD)", "type": "number", "key": "capital_needed", "default": 1000},
+            {"label": "📊 Revenue Projections", "type": "textarea", "key": "revenue_projections", "placeholder": "Provide a 3-5 year revenue projection"},
+        ],
+        "Pitch Deck 🎯": [
+            {"label": "🏢 Business Name", "type": "text", "key": "business_name", "placeholder": "Enter your business name"},
+            {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
+                "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"], "default": "IT"},
+            {"label": "💡 Business Idea", "type": "textarea", "key": "business_idea", "placeholder": "What is your business idea?"},
+            {"label": "🎯 Team Vision", "type": "textarea", "key": "team_vision", "placeholder": "What is your team's vision for the business?"},
+            {"label": "🚀 Market Opportunity", "type": "textarea", "key": "market_opportunity", "placeholder": "What market opportunity are you addressing?"},
+        ],
+        "Investor Materials 📈": [
+            {"label": "🏢 Business Name", "type": "text", "key": "business_name", "placeholder": "Enter your business name"},
+            {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
+                "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"], "default": "IT"},
+            {"label": "📈 Investment Opportunity", "type": "textarea", "key": "investment_opportunity", "placeholder": "Describe the investment opportunity"},
+            {"label": "👥 Team Background", "type": "textarea", "key": "team_background", "placeholder": "Describe the background of your team members"},
+            {"label": "📉 Financial Forecast", "type": "textarea", "key": "financial_forecast", "placeholder": "Provide your 3-5 year financial forecast"},
+        ],
+        "Technical Documentation 📘": [
+            {"label": "📘 Documentation Title", "type": "text", "key": "doc_title", "placeholder": "Enter the title of your documentation"},
+            {"label": "🛠️ Key Features", "type": "textarea", "key": "key_features", "placeholder": "Describe the key features of your product"},
+            {"label": "📜 Use Cases", "type": "textarea", "key": "use_cases", "placeholder": "Provide a list of use cases for your product"},
+            {"label": "📊 Technical Specifications", "type": "textarea", "key": "technical_specs", "placeholder": "Describe the technical specifications of your product"},
+        ],
+        "Project Proposal 🏗️": [
+            {"label": "🏗️ Project Name", "type": "text", "key": "project_name", "placeholder": "Enter your project name"},
+            {"label": "🔎 Project Description", "type": "textarea", "key": "project_description", "placeholder": "Describe your project"},
+            {"label": "🎯 Goals and Objectives", "type": "textarea", "key": "goals", "placeholder": "What are your project goals?"},
+            {"label": "📆 Timeline", "type": "textarea", "key": "timeline", "placeholder": "Provide the project timeline"},
+            {"label": "📊 Market Data", "type": "section", "key": "market_data"},
+            {"label": "💵 Capital Needed (in USD)", "type": "number", "key": "capital_needed", "default": 1000},
+        ],
+        "Investment Memorandum 💡": [
+            {"label": "🏢 Business Name", "type": "text", "key": "business_name", "placeholder": "Enter your business name"},
+            {"label": "💼 Startup Domain", "type": "select", "key": "startup_domain", 
+                "options": ["IT", "EdTech", "Consumer Goods", "FinTech", "Healthcare", "Other"], "default": "IT"},
+            {"label": "📈 Investment Highlights", "type": "textarea", "key": "investment_highlights", "placeholder": "Highlight your investment opportunities"},
+            {"label": "📊 Market Opportunity", "type": "textarea", "key": "market_opportunity", "placeholder": "Describe the market opportunity"},
+            {"label": "📉 Risk Analysis", "type": "textarea", "key": "risk_analysis", "placeholder": "Describe the risks associated with this investment"},
+        ],
+        "Shareholder Update 📊": [
+            {"label": "🏢 Business Name", "type": "text", "key": "business_name", "placeholder": "Enter your business name"},
+            {"label": "📊 Business Progress Overview", "type": "textarea", "key": "progress_overview", "placeholder": "Provide an overview of business progress"},
+            {"label": "✅ Key Achievements", "type": "textarea", "key": "achievements", "placeholder": "List key achievements"},
+            {"label": "🎯 Upcoming Goals", "type": "textarea", "key": "upcoming_goals", "placeholder": "Describe your upcoming goals"},
+            {"label": "📉 Challenges", "type": "textarea", "key": "challenges", "placeholder": "List current challenges faced by the business"},
+        ],
     }
 
     # Collect User Inputs
-    st.markdown("### 📝 Provide Your Startup Details")
+    st.markdown("### 📝 Provide Your Details")
     user_inputs = {}
+
     for field in fields[doc_type]:
         if field["type"] == "text":
-            user_inputs[field["key"]] = st.text_input(field["label"])
+            user_inputs[field["key"]] = st.text_input(field["label"], placeholder=field.get("placeholder", ""))
         elif field["type"] == "textarea":
-            user_inputs[field["key"]] = st.text_area(field["label"])
+            user_inputs[field["key"]] = st.text_area(field["label"], placeholder=field.get("placeholder", ""))
         elif field["type"] == "number":
             user_inputs[field["key"]] = st.number_input(
                 field["label"], min_value=0, value=field.get("default", 0)
             )
         elif field["type"] == "select":
-            user_inputs[field["key"]] = st.selectbox(field["label"], field["options"])
+            # Ensure that the index is valid by finding the default's position in the options
+            default_value = field.get("default", field["options"][0])  # Default to the first option if not specified
+            index = field["options"].index(default_value)  # Get index of default value in options
+            user_inputs[field["key"]] = st.selectbox(field["label"], field["options"], index=index)
         elif field["type"] == "section":
             with st.expander(field["label"]):
                 if field["key"] == "market_data":
-                    user_inputs["target_market"] = st.text_area("🌍 Target Market")
-                    user_inputs["competitors"] = st.text_area("📊 Competitors")
-                    user_inputs["market_trends"] = st.text_area("📈 Market Trends")
+                    user_inputs["target_market"] = st.text_area("🌍 Target Market", placeholder="Enter the target market details")
+                    user_inputs["competitors"] = st.text_area("📊 Competitors", placeholder="List your competitors")
+                    user_inputs["market_trends"] = st.text_area("📈 Market Trends", placeholder="Describe market trends")
                 elif field["key"] == "financial_data":
-                    user_inputs["revenue_model"] = st.text_area("💵 Revenue Model")
-                    user_inputs["cost_structure"] = st.text_area("💰 Cost Structure")
+                    user_inputs["revenue_model"] = st.text_area("💵 Revenue Model", placeholder="Describe the revenue model")
+                    user_inputs["cost_structure"] = st.text_area("💰 Cost Structure", placeholder="Describe the cost structure")
                     user_inputs["funding_needed"] = st.number_input("📉 Funding Needed (in USD)", min_value=0)
+
 
     # AI Settings
     st.markdown("### 🎨 Customization")
@@ -192,39 +242,31 @@ else:
                 tone=response_tone.lower(),
             )
 
-            # Spinner and Progress Bar
+            # Spinner, Countdown, and Progress Bar
+            countdown_time = 10  # Simulated countdown time in seconds
             with st.spinner("⚙️ Generating your document... Please wait!"):
                 progress = st.progress(0)
+                
                 for i in range(1, 101):
-                    time.sleep(0.01)
+                    time.sleep(countdown_time / 100)  # Simulate the time taken to generate
                     progress.progress(i)
 
-            # Query Gemini AI
-            doc_content = query_gemini(context, prompt)
+                # Query Gemini AI
+                doc_content = query_gemini(context, prompt)
 
 
             # Save and Display Results
 
             if doc_content:
-
                 st.session_state["generated_docs"].append({"type": doc_type, "content": doc_content})
-
                 st.markdown("### 📄 Generated Document")
-
                 st.markdown(f"### {doc_type}", unsafe_allow_html=True)
-
                 st.markdown(doc_content, unsafe_allow_html=True)
-
                 download_link = create_download_link(doc_content, f"{doc_type.replace(' ', '_')}.txt")
-
                 st.markdown(download_link, unsafe_allow_html=True)
-
             else:
-
                 st.error("❌ Failed to generate the document. Please try again.")
-
         else:
-
             st.error("⚠️ Please fill in all the required fields.")
 
 
