@@ -3,7 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Roboto', 'Arial', sans-serif; /* Material UI recommended font */
+    line-height: 1.5;
 }
 
 /* Body Styling */
@@ -18,6 +19,8 @@ body {
     align-items: center;
     overflow: hidden;
     font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* App Container */
