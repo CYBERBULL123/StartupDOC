@@ -204,14 +204,42 @@ else:
 
 
             # Save and Display Results
+
             if doc_content:
+
                 st.session_state["generated_docs"].append({"type": doc_type, "content": doc_content})
-                st.success("🚀 Document generated successfully!")
-                st.markdown(create_download_link(doc_content, f"{doc_type}_Document.txt"), unsafe_allow_html=True)
+
+                st.markdown("### 📄 Generated Document")
+
+                st.markdown(f"### {doc_type}", unsafe_allow_html=True)
+
+                st.markdown(doc_content, unsafe_allow_html=True)
+
+                download_link = create_download_link(doc_content, f"{doc_type.replace(' ', '_')}.txt")
+
+                st.markdown(download_link, unsafe_allow_html=True)
+
             else:
-                st.error("❌ Error generating document. Please try again.")
+
+                st.error("❌ Failed to generate the document. Please try again.")
+
         else:
-            st.warning("⚠️ Please fill in all the required fields.")
+
+            st.error("⚠️ Please fill in all the required fields.")
+
+
+
+    # Display Previously Generated Documents
+
+    if st.session_state["generated_docs"]:
+
+        st.markdown("<h3 style='color:#b3ac29;'>📂 Previous Documents</h3>", unsafe_allow_html=True)
+
+        for i, doc in enumerate(st.session_state["generated_docs"]):
+
+            with st.expander(f"📑 {doc['type']} - Document {i + 1}"):
+
+                st.markdown(doc["content"], unsafe_allow_html=True)
 
 # Add a footer (optional)
 st.markdown("---")
