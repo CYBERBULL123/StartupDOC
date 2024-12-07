@@ -45,7 +45,7 @@ if st.session_state.show_info:
         # 🚀 Effortlessly Build Your Startup Docs
         ---------
         
-        ***🔑 Key Features***
+        #### ***🔑 Key Features***
         
         The Startup Automation Tool is here to make your startup journey easier and faster. With just a few clicks, automate important tasks like creating business plans, funding proposals, and pitch decks. Here’s what it can do for you:
         - **Business Plans:** Generate a detailed plan for your startup's future, vision, and growth. 📑
@@ -54,7 +54,7 @@ if st.session_state.show_info:
         - **Investor Materials:** Craft documents that highlight what matters most to investors. 📈
        
         ----------
-        ***💡 How It Works***
+        #### ***💡 How It Works***
         
         Our tool is easy to use and walks you through the entire process:
         1. **Enter Your Details:** Share your startup’s goals, market, and vision. 📝
@@ -64,7 +64,7 @@ if st.session_state.show_info:
         5. **Ready to Go:** Download your document in a professional format, ready for presentations or investment meetings. 📥
          
         ------------
-        ***⚙️ Simple & Smart Technology***
+        #### ***⚙️ Simple & Smart Technology***
         
         The Startup Automation Tool uses smart technology behind the scenes to ensure your documents are:
         - **Tailored to Your Business:** It understands the unique details of your startup and creates documents that fit your specific needs. 📊
@@ -72,14 +72,14 @@ if st.session_state.show_info:
         - **Efficient & Fast:** What would normally take hours or days to create, is done in just a few minutes. ⏱️
        
         -------------
-        ***🌟 Why Choose Our Tool?***
+        #### ***🌟 Why Choose Our Tool?***
         
         1. **Saves Time:** No need to spend hours writing and formatting documents. Our tool does the hard work for you. ⏳
         2. **Easy to Use:** You don’t need to be a tech expert to use it—just follow simple steps and get the results you need. 🖥️
         3. **High-Quality Results:** Get professional-grade business documents that look polished and impress investors. 💼
         4. **Comprehensive:** Whether you're just starting or preparing to pitch to investors, this tool has everything you need. 📈
 
-        ***🔥 Get Started Now!***
+        #### ***🔥 Get Started Now!***
         
         Ready to simplify your startup journey? Click below to start generating your business documents today! 🎉
         """)
@@ -238,6 +238,7 @@ else:
     if st.button("✨ Generate Document"):
         if all(user_inputs.values()):  # Validate all required inputs
             doc_key = get_template_key(doc_type)
+            
             # Build context and prompt
             context = "\n".join([f"{key.replace('_', ' ').title()}: {value}" for key, value in user_inputs.items()])
             prompt = craft_prompt(
@@ -248,7 +249,7 @@ else:
             )
 
             # Spinner, Countdown, and Progress Bar
-            countdown_time = 10  # Simulated countdown time in seconds
+            countdown_time = 20  # Simulated countdown time in seconds
             with st.spinner("⚙️ Generating your document... Please wait!"):
                 progress = st.progress(0)
                 
@@ -279,53 +280,57 @@ else:
     # Display Previously Generated Documents
 
     if st.session_state["generated_docs"]:
-
         st.markdown("<h3 style='color:#b3ac29;'>📂 Previous Documents</h3>", unsafe_allow_html=True)
-
         for i, doc in enumerate(st.session_state["generated_docs"]):
-
             with st.expander(f"📑 {doc['type']} - Document {i + 1}"):
-
                 st.markdown(doc["content"], unsafe_allow_html=True)
 
-# Add a footer (optional)
+                # Generate and display the download link for each previously generated document
+                previous_download_link = create_download_link(doc["content"], f"{doc['type'].replace(' ', '_')}_Document_{i + 1}.txt")
+                st.markdown(previous_download_link, unsafe_allow_html=True)
+
+# Footer Section
 st.markdown("---")
-st.write("Developed by 🤠 (Aditya Pandey)")
+st.markdown(
+    """
+    <div style="text-align: center; font-size: 18px; color: #555;">
+        Developed by 🤠 <strong>Aditya Pandey</strong>
+    </div>
+    """,unsafe_allow_html=True
+)
 
-# Links
-linkedin_url = "https://www.linkedin.com/in/aditya-pandey-896109224"
-website_url = "https://aadi-web-1.onrender.com/"
-github_url = "https://github.com/CYBERBULL123"
-medium_url = "https://cyberbull.medium.com/"
-
-# Footer with responsive design and fixed at the bottom
+# Social Media Links in Footer
 st.markdown(
     """
     <style>
-    .social-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px; /* Space between items */
-        padding: 10px;
-    }
-    .social-link {
-        text-decoration: none;
-        font-size: max(18px, 1vw); /* Ensures text stays a good size */
-        transition: transform 0.2s ease-in-out;
-        color: black; /* Default link color */
-    }
-    .social-link:hover {
-        transform: scale(1.2); /* Hover effect to enlarge */
-        color: red; /* Change color on hover */
-    }
-    .emoji {
-        font-size: max(24px, 2vw); /* Ensures emojis remain large enough */
-        margin-right: 8px; /* Space between emoji and text */
-    }
-    
-
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-link {
+            text-decoration: none;
+            font-size: 16px;
+            color: #0073e6;
+            font-weight: bold;
+            border: 2px solid #0073e6;
+            border-radius: 5px;
+            padding: 5px 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        .social-link:hover {
+            background-color: #0073e6;
+            color: white;
+        }
+        .emoji {
+            margin-right: 5px;
+        }
     </style>
-
     <div class="footer">
         <div class="social-container">
             <a href="https://www.linkedin.com/in/aditya-pandey-896109224" class="social-link">
@@ -338,9 +343,9 @@ st.markdown(
                 <span class="emoji">🐙</span>GitHub
             </a>
             <a href="https://cyberbull.medium.com/" class="social-link">
-                <span class="emoji">✍️</span>Medium Blog
+                <span class="emoji">✍️</span>Blog
             </a>
         </div>
     </div>
     """, unsafe_allow_html=True
-) 
+)
