@@ -8,15 +8,6 @@ import time
 # App Configuration
 st.set_page_config(page_title="🚀 Startup Automation Tool", layout="wide", page_icon="🌟")
 
-st.markdown(
-    """
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
 # Load custom CSS
 def load_css(file_name):
     with open(file_name) as f:
@@ -106,22 +97,34 @@ else:
     """
     )
 
+    # Define the mapping of document names to keys for templates
+    doc_templates = {
+        "business_plan": "Business Plan 🏢",
+        "funding_proposal": "Funding Proposal 💼",
+        "pitch_deck": "Pitch Deck 🎯",
+        "investor_materials": "Investor Materials 📈",
+        "technical_documentation": "Technical Documentation 📘",
+        "project_proposal": "Project Proposal 🏗️",
+        "investment_memorandum": "Investment Memorandum 💡",
+        "shareholder_update": "Shareholder Update 📊",
+    }
+
     # Dropdown for Document Type with Emojis
     st.markdown("### 📑 Select the Document Type")
     doc_type = st.selectbox(
         "",
-        [
-            "Business Plan 🏢",
-            "Funding Proposal 💼",
-            "Pitch Deck 🎯",
-            "Investor Materials 📈",
-            "Technical Documentation 📘",
-            "Project Proposal 🏗️",
-            "Investment Memorandum 💡",
-            "Shareholder Update 📊",
-        ],
+        list(doc_templates.values()),  # Use the values from doc_templates dictionary
         index=0,
     )
+
+
+    # Function to get the corresponding template key based on the selected document type
+    def get_template_key(doc_type):
+        for key, value in doc_templates.items():
+            if value == doc_type:
+                return key
+        return None  
+
 
     # Input Fields Configuration with Enhanced Data
     fields = {
@@ -189,11 +192,12 @@ else:
         ],
     }
 
+    fields_to_render = fields.get(doc_type, [])
+
     # Collect User Inputs
     st.markdown("### 📝 Provide Your Details")
     user_inputs = {}
-
-    for field in fields[doc_type]:
+    for field in fields_to_render:
         if field["type"] == "text":
             user_inputs[field["key"]] = st.text_input(field["label"], placeholder=field.get("placeholder", ""))
         elif field["type"] == "textarea":
@@ -233,11 +237,12 @@ else:
     # Generate Document Button
     if st.button("✨ Generate Document"):
         if all(user_inputs.values()):  # Validate all required inputs
+            doc_key = get_template_key(doc_type)
             # Build context and prompt
             context = "\n".join([f"{key.replace('_', ' ').title()}: {value}" for key, value in user_inputs.items()])
             prompt = craft_prompt(
                 query=doc_type,
-                document_type=doc_type.lower().replace(" ", "_"),
+                document_type=doc_key,
                 language=response_language,
                 tone=response_tone.lower(),
             )
