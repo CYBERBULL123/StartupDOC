@@ -1,5 +1,6 @@
+# StartupDOC
 
-# Startup Automation Tool with Gemini AI and LangChain
+### Startup Automation Tool with Gemini AI and LangChain
 
 This project provides a web-based tool to automate the generation of essential documents for startups, including **Business Plans**, **Funding Proposals**, **Pitch Decks**, and **Investor Materials**. It uses **Gemini AI** for document generation and **LangChain** for dynamic prompt creation.
 
